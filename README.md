@@ -1,21 +1,11 @@
-# nodejs-starter-template
-You can use this template when you're starting a new project. It contains general concepts, you can customize it according to your needs.
-
-A boilerplate/starter project for quickly building RESTful APIs using Node.js, Express, and Mongoose.
-
-You will get a production-ready Node.js app installed and configured on your machine. The app comes with many built-in features, such as authentication using JWT, request validation, error handling, logging, API documentation, image uploading (to AWS bucket), email sending, etc.
-
-Social logins (Google&Apple), unit and integration tests, in-app purchases (Google&Apple), daily crons, notifications (firebase), pagination, etc could be added in the future. Get ready for more, star it and wait!
-
-<br />
-
+# SFORM EXPRESS SERVER 
 ## Manual Installation
 
-- git clone https://github.com/bahricanyesil/nodejs-starter-template.git
-- cd nodejs-starter-template
-- npm install
+- git clone https://github.com/TuanAnh1003/sfrom-server.git
+- cd sform-server
+- yarn 
 - Prepare the environment variables by generating .env file just as .env.sample file
-- npm start
+- yarn start
 
 <br />
 
@@ -85,18 +75,10 @@ AWS_SECRET_ACCESS_KEY=AWS_SECRET_ACCESS_KEY_HERE
 │  │  ├─ controllers
 │  │  │  └─ user
 │  │  │     ├─ auth
-│  │  │     │  ├─ forgot-password.js
 │  │  │     │  ├─ login.js
 │  │  │     │  ├─ logout.js
-│  │  │     │  ├─ refresh-token.js
-│  │  │     │  ├─ register.js
-│  │  │     │  ├─ send-verification-code.js
-│  │  │     │  └─ verify-email.js
 │  │  │     ├─ edit
 │  │  │     │  ├─ change-password.js
-│  │  │     │  └─ edit-user.js
-│  │  │     ├─ delete-user.js
-│  │  │     ├─ get-user.js
 │  │  │     └─ index.js
 │  │  ├─ middlewares
 │  │  │  ├─ auth
@@ -105,7 +87,6 @@ AWS_SECRET_ACCESS_KEY=AWS_SECRET_ACCESS_KEY_HERE
 │  │  │  ├─ image-upload.js
 │  │  │  ├─ index.js
 │  │  │  ├─ object-id-control.js
-│  │  │  └─ rate-limiter.js
 │  │  ├─ routes
 │  │  │  ├─ index.js
 │  │  │  └─ user.js
@@ -129,11 +110,9 @@ AWS_SECRET_ACCESS_KEY=AWS_SECRET_ACCESS_KEY_HERE
 │  │  │  ├─ generate-random-code.js
 │  │  │  ├─ ip-helper.js
 │  │  │  ├─ jwt-token-helper.js
-│  │  │  └─ local-text-helper.js
 │  │  ├─ lang    
 │  │  │  ├─ en.json
 │  │  │  ├─ get-text.js
-│  │  │  └─ tr.json
 │  │  ├─ index.js
 │  │  ├─ logger.js
 │  │  └─ send-code-to-email.js
