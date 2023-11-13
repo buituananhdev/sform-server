@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  mongodb:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: tuan_anh
+      MONGO_INITDB_ROOT_PASSWORD: 123456Aa
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+    environment:
+      MONGODB_URI: mongodb://tuan_anh:123456Aa@mongodb:27017/sform_db
+
+volumes:
+  mongo_data:
