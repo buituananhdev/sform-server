@@ -37,7 +37,6 @@ export default async (req, res) => {
           email: submission.userId.email,
           name: submission.userId.name,
         },
-        question: questionLabels,
         answers: submission.answers.map((answer) => {
           return {
             questionLabel: answer.questionId.label,
