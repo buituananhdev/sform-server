@@ -11,7 +11,11 @@ const submissionSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     require: true
-  }
+  },
+  answers: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Answer',
+  }],
 },
   {
     timestamps: true

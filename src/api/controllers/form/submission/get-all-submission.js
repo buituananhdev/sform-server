@@ -1,7 +1,6 @@
 import {
   Form,
   Submission,
-  Answer
 } from "../../../../models/index.js";
 export default async (req, res) => {
   try {
