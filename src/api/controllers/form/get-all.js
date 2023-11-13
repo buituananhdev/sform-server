@@ -1,7 +1,12 @@
-import { Form, User, Question } from "../../../models/index.js";
+import { Form } from "../../../models/index.js";
+import { getUserIdFromToken } from "../../../utils/helpers/jwt-token-helper.js";
+
 export default async (req, res) => {
   try {
-    const forms = await Form.find({ ownerId: req.params.id })
+    console.log('check')
+    const userId = getUserIdFromToken(req.headers["authorization"]);
+    console.log('checkkkk', userId)
+    const forms = await Form.find({ ownerId: userId })
       .populate("ownerId")
       .populate({
         path: "questions",
