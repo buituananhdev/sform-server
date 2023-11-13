@@ -1,7 +1,7 @@
 {
-  "name": "sform",
+  "name": "sform-server",
   "version": "1.0.0",
-  "description": "You can use this template when you're starting a new project. It contains general concepts, you can customize it according to your needs.",
+  "description": "",
   "main": "app.js",
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -28,19 +28,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bahricanyesil/nodejs-starter-template.git"
+    "url": ""
   },
   "keywords": [
-    "node.js",
-    "boilerplate",
-    "starter",
-    "template"
+    "node.js"
   ],
-  "author": "Bahrican Yesil",
+  "author": "Tuan Anh",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/bahricanyesil/nodejs-starter-template/issues"
-  },
-  "homepage": "https://github.com/bahricanyesil/nodejs-starter-template#readme",
   "type": "module"
 }

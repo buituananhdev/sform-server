@@ -1,4 +1,3 @@
-import logger from '../logger.js';
 import en from '../lang/en.js';
 
 export default (code, req, errorMessage) => {
@@ -12,12 +11,6 @@ export default (code, req, errorMessage) => {
   const enMessage = en[key];
   const trMessage = tr[key];
 
-  if (enMessage.includes('server error')) {
-    logger(code, userId, errorMessage, 'Server Error', req);
-  } else {
-    logger(code, userId, errorMessage ?? enMessage, 'Client Error', req);
-  }
-
   return {
     'resultMessage': {
       'en': enMessage,
@@ -26,25 +19,3 @@ export default (code, req, errorMessage) => {
     'resultCode': code
   };
 };
-
-/**
-* @swagger
-* components:
-*   schemas:
-*     Result:
-*       type: object
-*       properties:
-*         resultMessage:
-*           $ref: '#/components/schemas/ResultMessage'
-*         resultCode:
-*           $ref: '#/components/schemas/ResultCode'
-*     ResultMessage:
-*       type: object
-*       properties:
-*         en:
-*           type: string
-*         tr:
-*           type: string
-*     ResultCode:
-*       type: string
-*/

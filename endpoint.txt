@@ -1,8 +1,0 @@
-1. Form
-Add Form
-Get detail
-Get all
-2. Submit
-Submit
-get detail
-get all
