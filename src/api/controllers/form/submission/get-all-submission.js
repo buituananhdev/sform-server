@@ -1,6 +1,7 @@
 import {
   Form,
   Submission,
+  Question
 } from "../../../../models/index.js";
 export default async (req, res) => {
   try {
@@ -9,7 +10,12 @@ export default async (req, res) => {
     if (!form) {
       return res.status(404).json({ message: "Form not found" });
     }
+    const questions = await Question.find({ idForm: form._id });
 
+    // Tạo mảng chứa các nhãn của các câu hỏi
+    const questionLabels = questions.map((question) => {
+      return question.label;
+    });
     // Lấy tất cả các submissions của form đó
     const submissions = await Submission.find({ formId: form._id })
       .populate("userId", "email name") // Thay 'userId' bằng tên reference field của User trong Submission model
@@ -31,6 +37,7 @@ export default async (req, res) => {
           email: submission.userId.email,
           name: submission.userId.name,
         },
+        question: questionLabels,
         answers: submission.answers.map((answer) => {
           return {
             questionLabel: answer.questionId.label,
@@ -43,7 +50,11 @@ export default async (req, res) => {
     });
 
     // Trả về kết quả dưới dạng JSON
-    res.json(submissionsDetails);
+    res.json({
+      formId: form._id,
+      question_labels: questionLabels,
+      submissions: submissionsDetails,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
