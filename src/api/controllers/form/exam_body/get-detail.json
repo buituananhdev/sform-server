@@ -1,0 +1,48 @@
+{
+  "id": "6552345bc1fe6fdf74ed1319",
+  "owner": {
+    "email": "test@gmail.com",
+    "name": "Test Name"
+  },
+  "title": "Form title",
+  "description": "Form description",
+  "questions": [
+    {
+      "label": "question 1",
+      "type": "text",
+      "require": true,
+      "validation": {
+        "min": 5,
+        "max": 10
+      }
+    },
+    {
+      "label": "question 2",
+      "type": "radio"
+    },
+    {
+      "label": "question 3",
+      "type": "check_box",
+      "options": [
+        "option 1",
+        "option 2",
+        "option 3"
+      ]
+    },
+    {
+      "label": "question 4",
+      "type": "drop_down",
+      "options": [
+        "option 1",
+        "option 2",
+        "option 3"
+      ]
+    },
+    {
+      "label": "question 5",
+      "type": "file",
+      "file": "file data"
+    }
+  ]
+}
+
