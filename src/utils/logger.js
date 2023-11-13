@@ -1,5 +1,4 @@
 import { Log } from '../models/index.js';
-import ipHelper from './helpers/ip-helper.js';
 
 export default async (code, userId, errorMessage, level, req) => {
   let ip = 'no-ip';
