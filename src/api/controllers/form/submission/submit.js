@@ -1,5 +1,6 @@
 import { Form, Question, Answer, Submission } from "../../../../models/index.js";
 import { getUserIdFromToken } from "../../../../utils/helpers/jwt-token-helper.js";
+
 export default async (req, res) => {
   try {
     const userId = getUserIdFromToken(req.headers["authorization"]);
@@ -18,7 +19,7 @@ export default async (req, res) => {
 
     await submission.save();
 
-    answers.forEach(async (answer) => {
+    const answerPromises = answers.map(async (answer) => {
       const { questionId, value } = answer;
 
       const question = await Question.findById(questionId);
@@ -34,7 +35,16 @@ export default async (req, res) => {
       });
 
       await newAnswer.save();
+
+      // Push the answer ID to the submission.answers array
+      submission.answers.push(newAnswer._id);
     });
+
+    // Wait for all answer promises to resolve
+    await Promise.all(answerPromises);
+
+    // Save the submission with the updated answers array
+    await submission.save();
 
     res.json({ message: "Form submitted successfully" });
   } catch (error) {
