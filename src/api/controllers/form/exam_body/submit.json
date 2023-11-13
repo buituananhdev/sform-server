@@ -1,0 +1,26 @@
+{
+  "formId": "65523aaa7d1b91b0f600479b",
+  "userId": "655232f552796279e0ff5c9d",
+  "answers": [
+    {
+      "questionId": "65523aaa7d1b91b0f600479d",
+      "value": "Answer to question 1"
+    },
+    {
+      "questionId": "65523aaa7d1b91b0f600479e",
+      "value": "Answer to question 2"
+    },
+    {
+      "questionId": "65523aaa7d1b91b0f600479f",
+      "value": ["option 1", "option 2"]
+    },
+    {
+      "questionId": "65523aaa7d1b91b0f60047a0",
+      "value": "option 3"
+    },
+    {
+      "questionId": "65523aaa7d1b91b0f60047a1",
+      "value": "file data"
+    }
+  ]
+}

@@ -5,23 +5,19 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import { prefix } from './../config/index.js';
 import routes from './../api/routes/index.js';
-import { logger } from '../utils/index.js';
 import { jwtSecretKey } from '../config/index.js';
 import bodyParser from 'body-parser';
 
 export default (app) => {
   process.on('uncaughtException', async (error) => {
-    // console.log(error);
-    logger('00001', '', error.message, 'Uncaught Exception', '');
+    console.log(error);
   });
 
   process.on('unhandledRejection', async (ex) => {
-    // console.log(ex);
-    logger('00002', '', ex.message, 'Unhandled Rejection', '');
+    console.log(ex);
   });
 
   if (!jwtSecretKey) {
-    logger('00003', '', 'Jwtprivatekey is not defined', 'Process-Env', '');
     process.exit(1);
   }
 
@@ -40,10 +36,7 @@ export default (app) => {
 
   app.get('/', (_req, res) => {
     return res.status(200).json({
-      resultMessage: {
-        en: 'Project is successfully working...',
-        tr: 'Proje başarılı bir şekilde çalışıyor...'
-      },
+      resultMessage: 'Project is successfully working...',
       resultCode: '00004'
     }).end();
   });
@@ -77,12 +70,8 @@ export default (app) => {
       resultCode = '00014';
       level = 'Client Error';
     }
-    logger(resultCode, req?.user?._id ?? '', error.message, level, req);
     return res.json({
-      resultMessage: {
-        en: error.message,
-        tr: error.message
-      },
+      resultMessage: error.message,
       resultCode: resultCode,
     });
 
