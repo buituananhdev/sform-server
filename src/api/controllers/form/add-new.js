@@ -27,7 +27,7 @@ export default async (req, res) => {
     await savedForm.save();
     res.status(200).json(savedForm)
   } catch (error) {
-    console.log(error);
-    res.status(500).json("loi server");
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };

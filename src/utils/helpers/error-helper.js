@@ -9,12 +9,10 @@ export default (code, req, errorMessage) => {
   if (req && req.user && req.user._id) userId = req.user._id;
 
   const enMessage = en[key];
-  const trMessage = tr[key];
 
   return {
     'resultMessage': {
       'en': enMessage,
-      'tr': trMessage
     },
     'resultCode': code
   };

@@ -1,4 +1,4 @@
-import { Form, User, Question } from "../../../models/index.js";
+import { Form } from "../../../models/index.js";
 export default async (req, res) => {
   try {
     // Lấy thông tin form
