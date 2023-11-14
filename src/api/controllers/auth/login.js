@@ -37,9 +37,7 @@ export default async (req, res) => {
         created_at: Date.now(),
       });
     } else {
-      return res
-        .status(404)
-        .json(responseHelper(2, "Invalid email or password"));
+      return res.status(404).json({ message: "Invalid email or password" });
     }
   } catch (error) {
     console.error(error);
