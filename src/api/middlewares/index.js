@@ -1,2 +1,5 @@
 export { default as auth } from './auth/check-auth.js'
+export { default as authorizeOwner } from './auth/check-authorize-owner.js'
+export { default as authorizeSubmitter } from './auth/check-athorize-submitter.js'
+export { default as authorizeDetailSubmit } from './auth/check-authorize-detail-submit.js'
 export { default as objectIdControl } from './object-id-control.js'
