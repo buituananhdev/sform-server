@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { addNewForm, getDetailForm, getAllForm, submit, getAllSubmit, getDetailSubmit, getAllShared, updateShared } from '../controllers/form/index.js';
-import { auth, authorizeOwner, authorizeSubmitter, authorizeDetailSubmit } from '../middlewares/index.js';
+import { auth, authorizeOwner, authorizeSubmitter, authorizeDetailSubmit, uploadFile } from '../middlewares/index.js';
+
 const router = Router();
 
 // FORM 
@@ -9,7 +10,7 @@ router.get('/:id', auth, authorizeSubmitter, getDetailForm);
 router.get('', auth, getAllForm);
 
 //SUBMIT
-router.post('/:id/submit', auth, authorizeSubmitter, submit);
+router.post('/:id/submit', auth, authorizeSubmitter, uploadFile.single('file'), submit);
 router.get('/:id/detail_submit', auth, authorizeDetailSubmit, getDetailSubmit);
 router.get('/:id/all_submit', auth, authorizeOwner, getAllSubmit);
 

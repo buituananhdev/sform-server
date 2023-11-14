@@ -28,23 +28,26 @@ export default async (req, res) => {
         return res.status(404).json({ message: "Question not found" });
       }
 
+      let newValue = value;
+
+      if (question.type === 'file' && req.file) {
+        newValue = req.file.path;
+      }
+
       const newAnswer = new Answer({
         questionId,
         submissionId: submission._id,
         user: userId,
-        value,
+        value: newValue,
       });
 
       await newAnswer.save();
 
-      // Push the answer ID to the submission.answers array
       submission.answers.push(newAnswer._id);
     });
 
-    // Wait for all answer promises to resolve
     await Promise.all(answerPromises);
 
-    // Save the submission with the updated answers array
     const savedSumission = await submission.save();
 
     res.json({ message: "Form submitted successfully", data: savedSumission });
