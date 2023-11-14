@@ -17,11 +17,11 @@ export default async (req, res) => {
     if (!submission) {
       return res.status(404).json({ message: "Submission not found" });
     }
-    console.log(submission);
     // Tạo đối tượng submissionDetails theo định dạng yêu cầu
     const submissionDetails = {
       id: submission._id,
       user: {
+        userId: submission.userId._id,
         email: submission.userId.email,
         name: submission.userId.name,
       },
