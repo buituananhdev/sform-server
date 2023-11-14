@@ -4,15 +4,9 @@ export default async (req, res) => {
     const formId = req.params.id;
     const { sharedUsers } = req.body;
 
-    const form = await Form.findById(formId);
-    if (!form) {
-      return res.status(404).json({ message: 'Form not found' });
-    }
+    await Form.updateOne({formId}, { shared_users: sharedUsers })
 
-    form.shared_users = sharedUsers;
-    await form.save();
-
-    res.json({ message: 'Shared users updated successfully', data: form });
+    res.json({ message: 'Shared users updated successfully', data: sharedUsers });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });

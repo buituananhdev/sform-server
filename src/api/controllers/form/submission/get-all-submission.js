@@ -5,12 +5,8 @@ import {
 } from "../../../../models/index.js";
 export default async (req, res) => {
   try {
-    const form = await Form.findById(req.params.id);
-    if (!form) {
-      return res.status(404).json({ message: "Form not found" });
-    }
+    const form = req.form;
     const questions = await Question.find({ idForm: form._id });
-
     const questionLabels = questions.map((question) => {
       return question.label;
     });
