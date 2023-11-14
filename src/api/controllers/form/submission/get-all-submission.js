@@ -1,8 +1,4 @@
-import {
-  Form,
-  Submission,
-  Question
-} from "../../../../models/index.js";
+import { Form, Submission, Question } from "../../../../models/index.js";
 export default async (req, res) => {
   try {
     const form = req.form;
@@ -22,8 +18,12 @@ export default async (req, res) => {
       })
       .exec();
 
-    // Tạo một mảng chứa thông tin của từng submission
     const submissionsDetails = submissions.map((submission) => {
+      const answersObject = submission.answers.reduce((acc, answer) => {
+        acc[answer.questionId.label] = answer.value;
+        return acc;
+      }, {});
+
       return {
         id: submission._id,
         user: {
@@ -31,18 +31,12 @@ export default async (req, res) => {
           email: submission.userId.email,
           name: submission.userId.name,
         },
-        answers: submission.answers.map((answer) => {
-          return {
-            questionLabel: answer.questionId.label,
-            value: answer.value,
-          };
-        }),
+        answers: answersObject,
         createdAt: submission.createdAt,
         updatedAt: submission.updatedAt,
       };
     });
 
-    // Trả về kết quả dưới dạng JSON
     res.json({
       formId: form._id,
       question_labels: questionLabels,
