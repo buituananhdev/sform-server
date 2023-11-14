@@ -8,6 +8,7 @@ export default async (req, res) => {
       description: req.body.description,
       requiredAuth: req.body.requiredAuth,
       ownerId: userId,
+      shared_users: req.body.shared_users
     });
   
     const savedForm = await newForm.save();

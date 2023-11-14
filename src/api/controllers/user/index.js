@@ -1,6 +1,2 @@
-// AUTH
 export { default as addUser } from './add-new.js'
-
-// EDIT
-
-// OTHER
+export { default as searchUser } from './search-by-email.js'

@@ -3,9 +3,7 @@ import { getUserIdFromToken } from "../../../utils/helpers/jwt-token-helper.js";
 
 export default async (req, res) => {
   try {
-    console.log('check')
     const userId = getUserIdFromToken(req.headers["authorization"]);
-    console.log('checkkkk', userId)
     const forms = await Form.find({ ownerId: userId })
       .populate("ownerId")
       .populate({

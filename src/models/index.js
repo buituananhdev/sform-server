@@ -13,5 +13,3 @@ export const Form = formModel;
 export const Question = questionModel;
 export const Answer = answerModel;
 export const Submission = submissionModel;
-
-
