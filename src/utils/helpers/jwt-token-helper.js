@@ -25,10 +25,3 @@ export function signConfirmCodeToken(userId, confirmCode) {
   );
   return confirmCodeToken;
 }
-
-export function getUserIdFromToken(header) {
-  const token = header.slice(7);
-  const verified = verify(token, jwtSecretKey);
-  return verified._id;
-}
-

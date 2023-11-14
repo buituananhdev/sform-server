@@ -1,6 +1,3 @@
-// AUTH
 export { default as login } from './login.js'
-
-// EDIT
-
-// OTHER
+export { default as logout } from './logout.js'
+export { default as refreshToken } from './refresh-token.js'

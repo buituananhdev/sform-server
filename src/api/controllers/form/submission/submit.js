@@ -1,21 +1,19 @@
 import { Question, Answer, Submission, User } from "../../../../models/index.js";
-import { getUserIdFromToken } from "../../../../utils/helpers/jwt-token-helper.js";
 
 export default async (req, res) => {
   try {
-    const userId = getUserIdFromToken(req.headers["authorization"]);
     const formId = req.params.id;
     const { answers } = req.body;
 
     const form = req.form;
-    const user = await User.findById(userId);
+    const user = await User.findById(req.user._id);
     if (!form.shared_users || !form.shared_users.includes(user.email)) {
       return res.status(403).json({ message: "You do not have permission to submit this form" });
     }
 
     const submission = new Submission({
       formId,
-      userId,
+      userId: req.user._id,
     });
 
     await submission.save();
@@ -37,7 +35,7 @@ export default async (req, res) => {
       const newAnswer = new Answer({
         questionId,
         submissionId: submission._id,
-        user: userId,
+        user: req.user._id,
         value: newValue,
       });
 

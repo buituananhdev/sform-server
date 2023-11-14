@@ -1,13 +1,11 @@
 import { Form, Question } from "../../../models/index.js";
-import { getUserIdFromToken } from "../../../utils/helpers/jwt-token-helper.js";
 export default async (req, res) => {
   try {
-    const userId = getUserIdFromToken(req.headers["authorization"]);
     const newForm = new Form({
       title: req.body.title,
       description: req.body.description,
       requiredAuth: req.body.requiredAuth,
-      ownerId: userId,
+      ownerId: req.user._id,
       shared_users: req.body.shared_users
     });
   

@@ -1,10 +1,8 @@
 import { Form } from "../../../models/index.js";
-import { getUserIdFromToken } from "../../../utils/helpers/jwt-token-helper.js";
 
 export default async (req, res) => {
   try {
-    const userId = getUserIdFromToken(req.headers["authorization"]);
-    const forms = await Form.find({ ownerId: userId })
+    const forms = await Form.find({ ownerId: req.user._id })
       .populate("ownerId")
       .populate({
         path: "questions",

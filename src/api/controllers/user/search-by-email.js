@@ -1,9 +1,7 @@
 import { User } from "../../../models/index.js";
-import { getUserIdFromToken } from "../../../utils/helpers/jwt-token-helper.js";
 
 export default async (req, res) => {
   try {
-    const userId = getUserIdFromToken(req.headers["authorization"]);
     const { email } = req.query;
     if (!email) {
       return res
@@ -12,7 +10,7 @@ export default async (req, res) => {
     }
 
     const regex = new RegExp(email, "i");
-    const users = await User.find({ email: { $regex: regex }, _id: { $ne: userId } }).limit(10);
+    const users = await User.find({ email: { $regex: regex }, _id: { $ne: req.user._id } }).limit(10);
 
     if (users.length === 0) {
       return res
