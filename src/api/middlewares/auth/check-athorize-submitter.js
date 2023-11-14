@@ -8,12 +8,12 @@ export default async (req, res, next) => {
     if (!form) {
       return res.status(404).json({ message: "Form not found" });
     }
-
     if(!form.requiredAuth) {
       req.form = form;
       next();
       return;
   }
+  console.log(form)
 
     if (form.ownerId.toString() === req.user._id) {
       req.form = form;
