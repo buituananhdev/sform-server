@@ -10,9 +10,23 @@ export default async (req, res) => {
     if (!user) {
       return res.status(404).json("Invalid email or password");
     }
+
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (passwordMatch) {
+      let existingToken = await Token.findOne({ userId: user._id });
+
+      if (!existingToken) {
+        existingToken = new Token({
+          userId: user._id,
+          refreshToken: "",
+          status: false,
+          expiresIn: 0,
+          createdAt: 0,
+        });
+        await existingToken.save();
+      }
+
       const accessToken = signAccessToken(user._id);
       const refreshToken = signRefreshToken(user._id);
 
