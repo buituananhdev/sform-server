@@ -4,7 +4,7 @@ export default async (req, res) => {
     const formId = req.params.id;
     const { sharedUsers } = req.body;
 
-    await Form.updateOne({formId}, { shared_users: sharedUsers })
+    await Form.updateOne({ _id: formId }, { shared_users: sharedUsers })
 
     res.json({ message: 'Shared users updated successfully', data: sharedUsers });
   } catch (error) {

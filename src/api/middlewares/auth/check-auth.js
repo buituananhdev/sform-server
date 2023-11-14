@@ -1,12 +1,18 @@
 import { User, Token } from '../../../models/index.js';
 import { errorHelper } from '../../../utils/index.js';
 import { jwtSecretKey } from '../../../config/index.js';
+import { Form } from '../../../models/index.js';
 import pkg from 'mongoose';
 const { Types } = pkg;
 import jwt from 'jsonwebtoken';
 const { verify } = jwt;
 
 export default async (req, res, next) => {
+  const form = await Form.findById(req.params.id);
+  if(form && !form.requiredAuth) {
+    next();
+    return;
+  }
   let token = req.header('Authorization');
   if (!token) return res.status(401).json(errorHelper('00006', req));
 
