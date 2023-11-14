@@ -1,9 +1,8 @@
 import { Submission, Answer } from "../../../../models/index.js";
 export default async (req, res) => {
   try {
-    // Lấy submission thông qua submission ID
     const submission = await Submission.findById(req.params.id)
-      .populate("userId", "email name") // Thay 'userId' bằng tên reference field của User trong Submission model
+      .populate("userId", "email name")
       .populate({
         path: "answers",
         model: "Answer",
@@ -17,7 +16,6 @@ export default async (req, res) => {
     if (!submission) {
       return res.status(404).json({ message: "Submission not found" });
     }
-    // Tạo đối tượng submissionDetails theo định dạng yêu cầu
     const submissionDetails = {
       id: submission._id,
       user: {
@@ -35,7 +33,6 @@ export default async (req, res) => {
       updatedAt: submission.updatedAt,
     };
 
-    // Trả về kết quả dưới dạng JSON
     res.json(submissionDetails);
   } catch (error) {
     console.error(error);

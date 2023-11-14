@@ -13,7 +13,7 @@ export default async (req, res, next) => {
     if (form.ownerId.toString() !== userId) {
       return res.status(403).json({ message: "You do not have permission to view this data" });
     }
-
+    req.form = form;
     next();
   } catch (error) {
     console.error(error);

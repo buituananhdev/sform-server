@@ -6,7 +6,7 @@ const router = Router();
 // FORM 
 router.post('', auth, addNewForm);
 router.get('/:id', auth, authorizeSubmitter, getDetailForm);
-router.get('', auth, authorizeOwner, getAllForm);
+router.get('', auth, getAllForm);
 
 //SUBMIT
 router.post('/:id/submit', auth, authorizeSubmitter, submit);
