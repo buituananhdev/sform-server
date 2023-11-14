@@ -26,17 +26,11 @@ export default async (req, res) => {
         return res.status(404).json({ message: "Question not found" });
       }
 
-      let newValue = value;
-
-      if (question.type === 'file' && req.file) {
-        newValue = req.file.path;
-      }
-
       const newAnswer = new Answer({
         questionId,
         submissionId: submission._id,
         user: req.user._id,
-        value: newValue,
+        value,
       });
 
       await newAnswer.save();
