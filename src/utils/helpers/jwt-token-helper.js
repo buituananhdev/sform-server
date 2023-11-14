@@ -25,3 +25,14 @@ export function signConfirmCodeToken(userId, confirmCode) {
   );
   return confirmCodeToken;
 }
+
+export function verifyToken(req) {
+  let token = req.header('Authorization');
+  if(!token) {
+    return false;
+  }
+  if (token.includes('Bearer')) {
+    token = req.header('Authorization').replace('Bearer ', '');
+  }
+  return verify(token, jwtSecretKey);
+}

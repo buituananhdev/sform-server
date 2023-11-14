@@ -5,12 +5,6 @@ export default async (req, res) => {
     const formId = req.params.id;
     const { answers } = req.body;
 
-    const form = req.form;
-    const user = await User.findById(req.user._id);
-    if (!form.shared_users || !form.shared_users.includes(user.email)) {
-      return res.status(403).json({ message: "You do not have permission to submit this form" });
-    }
-
     const submission = new Submission({
       formId,
       userId: req.user._id,
