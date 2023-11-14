@@ -9,7 +9,7 @@ router.post('', auth, addNewForm);
 router.get('/:id', auth, authorizeSubmitter, getDetailForm);
 router.get('', auth, getAllForm);
 
-//SUBMIT
+// SUBMIT
 router.post('/:id/submit', auth, authorizeSubmitter, uploadFile.single('file'), submit);
 router.get('/:id/detail_submit', auth, authorizeDetailSubmit, getDetailSubmit);
 router.get('/:id/all_submit', auth, authorizeOwner, getAllSubmit);

@@ -15,6 +15,8 @@ export default async (req, res) => {
         id: form._id,
         title: form.title,
         description: form.description,
+        shortId: form.shortId,
+        requireAuth: form.requiredAuth,
         questions: form.questions.map((question) => {
           const questionDetails = {
             id: question._id,
