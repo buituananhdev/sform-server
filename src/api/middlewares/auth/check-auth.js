@@ -5,6 +5,7 @@ import pkg from 'mongoose';
 const { Types } = pkg;
 
 export default async (req, res, next) => {
+  try {
   const form = await Form.findById(req.params.id);
   const user = verifyToken(req);
   if(user) {
@@ -16,7 +17,6 @@ export default async (req, res, next) => {
   }
   if (!user) return res.status(401).json(errorHelper('00006', req));
 
-  try {
     if (!Types.ObjectId.isValid(req.user._id))
       return res.status(400).json(errorHelper('00007', req));
 
