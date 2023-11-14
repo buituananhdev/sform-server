@@ -1,10 +1,7 @@
-import { getUserIdFromToken } from '../../../utils/helpers/jwt-token-helper.js';
 import { Submission } from '../../../models/index.js';
 
 export default async (req, res, next) => {
   try {
-    const userId = getUserIdFromToken(req.headers["authorization"]);
-
     const submission = await Submission.findById(req.params.id).populate({
       path: 'formId',
       populate: {
@@ -19,7 +16,7 @@ export default async (req, res, next) => {
 
     const form = submission.formId;
 
-    if (form.ownerId._id.toString() !== userId && submission.userId.toString() !== userId) {
+    if (form.ownerId._id.toString() !== req.user._id && submission.userId.toString() !== req.user._id) {
       return res.status(403).json({ message: "You do not have permission to view this data" });
     }
 

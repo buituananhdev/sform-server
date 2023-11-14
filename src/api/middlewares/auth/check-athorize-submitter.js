@@ -1,9 +1,7 @@
-import { getUserIdFromToken } from '../../../utils/helpers/jwt-token-helper.js';
 import { Form, User } from '../../../models/index.js';
 
 export default async (req, res, next) => {
   try {
-    const userId = getUserIdFromToken(req.headers["authorization"]);
     const formId = req.params.id;
 
     const form = await Form.findById(formId);
@@ -11,13 +9,13 @@ export default async (req, res, next) => {
       return res.status(404).json({ message: "Form not found" });
     }
 
-    if (form.ownerId.toString() === userId) {
+    if (form.ownerId.toString() === req.user._id) {
       req.form = form;
       next();
       return;
     }
 
-    const user = await User.findById(userId);
+    const user = await User.findById(req.user._id);
     if (!form.shared_users || !form.shared_users.includes(user.email)) {
       return res.status(403).json({ message: "You do not have permission to view or submit this form" });
     }

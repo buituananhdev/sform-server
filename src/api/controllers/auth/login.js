@@ -16,24 +16,30 @@ export default async (req, res) => {
       const accessToken = signAccessToken(user._id);
       const refreshToken = signRefreshToken(user._id);
 
-      const tokenEntity = new Token({
-        access_token: accessToken,
-        refresh_token: refreshToken,
-        userId: user._id,
-        expiresIn: 24 * 60 * 60,
-        createdAt: Date.now(),
+      await Token.updateOne(
+        { userId: user._id },
+        {
+          $set: {
+            refreshToken: refreshToken,
+            status: true,
+            expiresIn: Date.now() + 604800000,
+            createdAt: Date.now(),
+          },
+        }
+      ).catch((err) => {
+        return res.status(500).json(errorHelper("00046", req, err.message));
       });
-
-      const savedToken = await tokenEntity.save();
 
       return res.status(200).json({
         access_token: accessToken,
-        refresh_token: refreshToken,
-        expires_in: 24 * 60 * 60,
+        refreshToken: refreshToken,
+        expiresIn: 24 * 60 * 60,
         created_at: Date.now(),
       });
     } else {
-      return res.status(404).json(responseHelper(2, "Invalid email or password"));
+      return res
+        .status(404)
+        .json(responseHelper(2, "Invalid email or password"));
     }
   } catch (error) {
     console.error(error);
