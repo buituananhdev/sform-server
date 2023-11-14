@@ -1,11 +1,22 @@
 import { Form, Question } from "../../../models/index.js";
+import shortid from "shortid";
+
 export default async (req, res) => {
   try {
+    let shortUrl = shortid.generate();
+    let existingUrl = await Form.findOne({ shortId: shortUrl });
+
+    while (existingUrl) {
+      shortUrl = shortid.generate();
+      existingUrl = await Form.findOne({ shortId: shortUrl });
+    }
+
     const newForm = new Form({
       title: req.body.title,
       description: req.body.description,
       requiredAuth: req.body.requiredAuth,
       ownerId: req.user._id,
+      shortId: shortUrl,
       shared_users: req.body.shared_users
     });
   
