@@ -34,6 +34,7 @@ export default async (req, res) => {
       return {
         id: submission._id,
         user: {
+          userId: submission.userId._id,
           email: submission.userId.email,
           name: submission.userId.name,
         },

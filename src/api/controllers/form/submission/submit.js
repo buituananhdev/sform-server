@@ -48,9 +48,9 @@ export default async (req, res) => {
     await Promise.all(answerPromises);
 
     // Save the submission with the updated answers array
-    await submission.save();
+    const savedSumission = await submission.save();
 
-    res.json({ message: "Form submitted successfully" });
+    res.json({ message: "Form submitted successfully", data: savedSumission });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
