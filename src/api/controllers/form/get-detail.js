@@ -27,8 +27,7 @@ export default async (req, res) => {
         const questionDetails = {
           id: question._id,
           label: question.label,
-          type: question.type,
-          required: question.required,
+          type: question.type
         };
 
         if (question.validation) {
@@ -46,6 +45,7 @@ export default async (req, res) => {
 
         return questionDetails;
       }),
+      shared_users: form.shared_users
     };
 
     // Trả về kết quả dưới dạng JSON

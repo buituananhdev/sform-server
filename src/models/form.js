@@ -19,6 +19,7 @@ const formSchema = new Schema({
     require: true
   },
   questions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Question' }],
+  shared_users: { type: Schema.Types.Mixed },
 },
   {
     timestamps: true

@@ -1,4 +1,4 @@
-import { Form, Question, Answer, Submission } from "../../../../models/index.js";
+import { Form, Question, Answer, Submission, User } from "../../../../models/index.js";
 import { getUserIdFromToken } from "../../../../utils/helpers/jwt-token-helper.js";
 
 export default async (req, res) => {
@@ -10,6 +10,10 @@ export default async (req, res) => {
     const form = await Form.findById(formId);
     if (!form) {
       return res.status(404).json({ message: "Form not found" });
+    }
+    const user = await User.findById(userId);
+    if (!form.shared_users || !form.shared_users.includes(user.email)) {
+      return res.status(403).json({ message: "You do not have permission to submit this form" });
     }
 
     const submission = new Submission({
