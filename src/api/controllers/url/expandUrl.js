@@ -2,9 +2,9 @@ import { Form } from "../../../models/index.js";
 
 export default async (req, res) => {
   try {
-    const shortId = req.params.id;
-
-    const existingForm = await Form.findOne({ shortId });
+    const shortUrl = req.params.id;
+    console.log(shortUrl)
+    const existingForm = await Form.findOne({ shortId: shortUrl });
 
     if (existingForm) {
       res.status(200).json({ formId: existingForm._id });
